@@ -1,0 +1,71 @@
+
+from tokenize import Number
+from lista import Lista
+from jurassic_park import dinosaurs
+
+print(dinosaurs)
+class dinosaurio:
+    def __init__(self, time, zone_code, dino_number, alert_level):
+        self.tiempo = time
+        self.codigo_zona = zone_code
+        self.numero_dinosaurio = dino_number
+        self.nivel_alerta = alert_level
+
+def __str__(self):
+        return f"{self.tiempo} | {self.codigo_zona} | {self.dinosaurio} | {self.nivel_alerta}"
+
+lista_dinosaurio = Lista()
+lista_dinosaurio2= Lista()
+
+
+file = open('/home/cypher/Documentos/python/lista/ejercicios _lista/alerts.txt')
+lineas = file.readlines()
+
+lista = []
+
+lineas.pop(0)  # quitar cabecera
+for linea in lineas:
+    datos = linea.split(';')
+    datos.pop(-1)
+    #print(datos[3].split(';'))
+    lista_dinosaurio.insertar(dinosaurio(datos[0],
+                             datos[1],
+                             datos[2],
+                             datos[3].split(','),
+                        campo='tiempo'))
+    lista_dinosaurio2.insertar(dinosaurio(datos[0],
+                              datos[1],
+                              datos[2],
+                              datos[3].split(';')),
+                         campo='nombre')
+    lista.append(dinosaurio(datos[0],
+                      datos[1],
+                      datos[2],
+                      datos[3].split(';')))
+# !
+lista_dinosaurio.barrido()
+print()
+
+def busqueda(self, buscado, campo=None):
+        pos = None
+        aux = self.__inicio
+        while(aux is not None and pos is None):
+            if(lista_dinosaurio(aux.info, campo) == buscado):
+                pos = aux
+            aux = aux.sig
+
+        return pos
+
+
+
+
+
+
+dato = lista_dinosaurio.busqueda('', 'nombre')
+if dato:
+    print(f'el dino {dato.info}')
+else:
+    print('el dino no esta en la lista')
+
+
+
