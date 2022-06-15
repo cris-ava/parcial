@@ -1,71 +1,107 @@
-
-from tokenize import Number
-from lista import Lista
 from jurassic_park import dinosaurs
+from lista import Lista
 
-print(dinosaurs)
-class dinosaurio:
-    def __init__(self, time, zone_code, dino_number, alert_level):
+
+class Dinosaurio:
+    def __init__(self, time, zone_code, dino_number, alert_level,name):
         self.tiempo = time
         self.codigo_zona = zone_code
         self.numero_dinosaurio = dino_number
         self.nivel_alerta = alert_level
+        self.nombre = name
 
-def __str__(self):
-        return f"{self.tiempo} | {self.codigo_zona} | {self.dinosaurio} | {self.nivel_alerta}"
+    def __str__(self):
+        return f"{self.tiempo} | {self.codigo_zona} | {self.dinosaurio} | {self.nivel_alerta} | {self.nombre}"
 
-lista_dinosaurio = Lista()
-lista_dinosaurio2= Lista()
+def busqueda(buscado):
+    for dino in dinosaurs:
+        if (int(buscado) == dino['number']):
+            return dino ['name']
 
 
 file = open('/home/cypher/Documentos/python/lista/ejercicios _lista/alerts.txt')
 lineas = file.readlines()
-
-lista = []
-
 lineas.pop(0)  # quitar cabecera
+#print(lineas)
+lista_dinosaurio = Lista()
+
 for linea in lineas:
-    datos = linea.split(';')
-    datos.pop(-1)
-    #print(datos[3].split(';'))
-    lista_dinosaurio.insertar(dinosaurio(datos[0],
-                             datos[1],
-                             datos[2],
-                             datos[3].split(','),
-                        campo='tiempo'))
-    lista_dinosaurio2.insertar(dinosaurio(datos[0],
-                              datos[1],
-                              datos[2],
-                              datos[3].split(';')),
-                         campo='nombre')
-    lista.append(dinosaurio(datos[0],
-                      datos[1],
-                      datos[2],
-                      datos[3].split(';')))
-# !
-lista_dinosaurio.barrido()
+    dato = linea.split(';')
+    dato[3] = dato[3][:-1]
+    dato.append(busqueda(dato[2]))
+    lista_dinosaurio.insertar(Dinosaurio(dato[0],
+                                        dato[1],
+                                        dato[2],
+                                        dato[3],
+                                        dato[4]),'time')
+
+
 print()
-
-def busqueda(self, buscado, campo=None):
-        pos = None
-        aux = self.__inicio
-        while(aux is not None and pos is None):
-            if(lista_dinosaurio(aux.info, campo) == buscado):
-                pos = aux
-            aux = aux.sig
-
-        return pos
+lista_dinosaurio.barrido()
 
 
 
-
-
-
-dato = lista_dinosaurio.busqueda('', 'nombre')
+#ocultar informacion
+lista_alerta = Lista()
+print()
+dato = lista_alerta.eliminar('WYG075', 'codigo_zona')
 if dato:
-    print(f'el dino {dato.info}')
+    print(f'La informacion {dato.codigo_zona} esta oculta')
 else:
-    print('el dino no esta en la lista')
+    print('el codigo no se encontro: ')
 
+dato = lista_alerta.eliminar ('SXH966', 'codigo_zona')
+if dato:
+    print(f'la informacion {dato.codigo_zona} esta oculta')
+else:
+    print('El codigo no se encontro: ')
+dato = lista_alerta.eliminar ('LYF010', 'codigo_zona')
+if dato:
+    print(f'la informacion {dato.codigo_zona} esta oculta')
+else:
+    print('el codigo no se encontro: ')
+dato = lista_alerta.busqueda('HYD195', 'codigo_zona')
+if dato:
+     dato.info.nombre = 'Mosasaurus.'
+     print(f'el dinosaurio {dato.info.nombre} fue modificado')
+else:
+     print('el dinosaurio no esta en la lista')
+
+
+
+lista_nombre = Lista()
+
+from cola import Cola
+cola_carnivoros = Cola()
+cola_hervivoros = Cola()
+
+for i in range(lista_nombre.tamanio()):
+    dino = lista_nombre.obtener_elemento(i)
+    if(dino.nivel != 'low' and dino.nivel != 'medium'):
+        if(dino.tipo == 'carnivoro'):
+            cola_carnivoros.arribo(dino)
+        elif(dino.tipo == 'herbivoro'):
+            cola_hervivoros.arribo(dino)
+
+print()
+print('Dinosaurios Carnivoros ')
+while(not cola_carnivoros.cola_vacia()):
+    x=cola_carnivoros.atencion()
+    print(x)
+
+print()
+print('Dinosaurios Carnivoros ')
+while(not cola_hervivoros.cola_vacia()):
+    x=cola_hervivoros.atencion()
+    print(x)
+
+
+
+print()
+print('Lista Dinosaurios Raptors y carnotaurus: ')
+lista_dinosaurio.barrido_Raptors_Carno()
+print()
+print('Zona donde hay Compsognathus: ')
+lista_dinosaurio.barrido_Zona()
 
 
